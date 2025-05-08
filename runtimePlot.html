@@ -1,0 +1,60 @@
+<!-- Trying out Chart.js for the first time for fun, definitely not an expert :) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Layup Sequence Runtime Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="runtimeData.js"></script>
+</head>
+
+<body>
+  <h2>Layup Sequence - Runtime vs n</h2>
+  <canvas id="runtimeChart" width="800" height="400"></canvas>
+
+  <script>
+    const ctx = document.getElementById('runtimeChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: runtimeData.map(d => d.n),
+        datasets: [{
+          label: 'Runtime (ms)',
+          data: runtimeData.map(d => d.runtimeMs),
+          borderColor: 'rgb(75, 192, 192)',
+          borderWidth: 2,
+          fill: false,
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Layup Sequence Runtime vs n'
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'n'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Runtime (ms)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
+
